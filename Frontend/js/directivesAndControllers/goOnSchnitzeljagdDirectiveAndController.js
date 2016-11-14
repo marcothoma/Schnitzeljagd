@@ -8,8 +8,15 @@ myApp.directive('sjGoOnSchnitzeljagd', function() {
         templateUrl: '../Frontend/templates/goOnSchnitzeljagdView.html'
     };
 });
-myApp.controller('goOnSchnitzeljagdController', function($scope, $http) {
+myApp.controller('goOnSchnitzeljagdController', function($scope,$http) {
+
     $http.get("../Backend/index.php?action=gameList").success(function(games){
         $scope.games = games;
     });
+
+    $scope.setClicked = function(rbID) {
+        console.log("radio_" + rbID);
+        var radioButtonToSelect = document.getElementById("radio_" + rbID);
+        radioButtonToSelect.checked = true;
+    }
 });
