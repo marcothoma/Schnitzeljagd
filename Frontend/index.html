@@ -17,6 +17,7 @@
         <script src="js/index.js"></script>
         <script src="js/directivesAndControllers/homeDirectiveAndController.js"></script>
         <script src="js/directivesAndControllers/newSchnitzeljagdDirectiveAndController.js"></script>
+        <script src="js/directivesAndControllers/savePointDirectiveAndController.js"></script>
     </head>
     <body class="container">
     <div>
@@ -27,10 +28,10 @@
             <sj-home></sj-home>
         </script>
         <script id="newSchnitzeljagd.html" type="text/ng-template">
-        <sj-new-schnitzeljagd></sj-new-schnitzeljagd>
+            <sj-new-schnitzeljagd></sj-new-schnitzeljagd>
         </script>
-        <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap">
+        <script id="savePoint.html" type="text/ng-template">
+            <sj-save-point></sj-save-point>
         </script>
     </div>
     </body>
