@@ -15,24 +15,19 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="js/index.js"></script>
+        <script src="js/directivesAndControllers/homeDirectiveAndController.js"></script>
+        <script src="js/directivesAndControllers/newSchnitzeljagdDirectiveAndController.js"></script>
     </head>
     <body class="container">
     <div>
-        <a href="#/"><h1>Schnitzeljagd</h1></a>
+        <a href="#/"><h1 class="text-center">Schnitzeljagd</h1></a>
         <hr />
         <div ng-view></div>
         <script id="/.html" type="text/ng-template">
-            <div >
-                <a class="btn btn-block btn-default" href="#newSchnitzeljagd">Create new Schnitzeljagd</a>
-                <a class="btn btn-block btn-default" href="#">Go On Schnitzeljagd</a>
-            </div>
+            <sj-home></sj-home>
         </script>
         <script id="newSchnitzeljagd.html" type="text/ng-template">
-        <div >
-            <div id="map"></div>
-            <button></button>
-            <button></button>
-        </div>
+        <sj-new-schnitzeljagd></sj-new-schnitzeljagd>
         </script>
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap">

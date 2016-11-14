@@ -6,7 +6,6 @@ myApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: '/.html',
-            controller: 'homeController'
         })
         .when('/newSchnitzeljagd', {
             templateUrl: 'newSchnitzeljagd.html',
@@ -18,9 +17,6 @@ myApp.config(['$routeProvider', function ($routeProvider) {
 
 }]);
 
-myApp.controller('homeController', function ($scope) {
-    console.log("DINI TICKI MUETTER");
-});
 myApp.controller('newSchnitzeljagdController', function ($scope) {
     // Note: This example requires that you consent to location sharing when
     // prompted by your browser. If you see the error "The Geolocation service
