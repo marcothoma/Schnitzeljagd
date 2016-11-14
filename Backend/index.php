@@ -23,6 +23,11 @@ switch ($action) {
         $controller = new Controller();
         echo $controller->getAllGamesForGameList();
         break;
+    case 'createSchnitzeljagd':
+        $controller = new Controller();
+        $controller->addPoint();
+        $controller->saveSchnitzeljagd();
+        break;
 }
 
 

@@ -57,6 +57,12 @@ class Model {
         return $this->readSqlResult($sqlResult);
     }
 
+    public function getNextGameID() {
+        $sql = "SELECT MAX(`id`) + 1 \"NextGameID\" FROM `games`";
+        $sqlResult =  $this->databaseConnection->query($sql);
+        return $this->readSqlResult($sqlResult);
+    }
+
     public function readSqlResult($sqlResult) {
         if ($sqlResult->num_rows > 0) {
             while ($row = $sqlResult->fetch_object()) {
