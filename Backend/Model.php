@@ -23,14 +23,14 @@ class Model {
     public function getGameByID($gameID) {
         $sql = "SELECT * FROM `games` WHERE `id` LIKE " . $gameID;
         $sqlResult = $this->databaseConnection->query($sql);
-        return $this->convertToJson($sqlResult);
+        return $this->readSqlResult($sqlResult);
     }
 
 
     public function getAllGames() {
         $sql = "SELECT * FROM `games`";
         $sqlResult = $this->databaseConnection->query($sql);
-        return $this->convertToJson($sqlResult);
+        return $this->readSqlResult($sqlResult);
     }
 
     public function savePoint($fk_games, $description, $xCoordinate, $yCoordinate) {
@@ -41,17 +41,23 @@ class Model {
     public function getPointByID($pointID) {
         $sql = "SELECT * FROM `points` WHERE `id` LIKE " . $pointID;
         $sqlResult = $this->databaseConnection->query($sql);
-        return $this->convertToJson($sqlResult);
+        return $this->readSqlResult($sqlResult);
     }
 
 
     public function getAllPointsByGameID($gameID) {
         $sql = "SELECT * FROM `points` WHERE `fk_games` LIKE " . $gameID;
         $sqlResult = $this->databaseConnection->query($sql);
-        return $this->convertToJson($sqlResult);
+        return $this->readSqlResult($sqlResult);
     }
 
-    public function convertToJson($sqlResult) {
+    public function getNumberOfPointsByGameID($gameID) {
+        $sql = "SELECT COUNT(*) \"NumberOfPoints\" FROM `points` WHERE `fk_games` LIKE " . $gameID;
+        $sqlResult =  $this->databaseConnection->query($sql);
+        return $this->readSqlResult($sqlResult);
+    }
+
+    public function readSqlResult($sqlResult) {
         if ($sqlResult->num_rows > 0) {
             while ($row = $sqlResult->fetch_object()) {
                 $data[] = $row;
@@ -59,6 +65,6 @@ class Model {
         } else {
             $data[] = null;
         }
-        return json_encode($data);
+        return $data;
     }
 }

@@ -6,10 +6,24 @@
  * Time: 14:45
  */
 
+include_once ("RessourceLoader.php");
 
-include_once ("playSchnitzeljagd.php");
+if(!$_GET['action']){
+    $action = "";
+} else{
+    $action = $_GET['action'];
+}
+
+$ressourceLoader = new RessourceLoader();
+$ressourceLoader->load($action);
 
 
-$schnitzeljagd = new playSchnitzeljagd();
-$schnitzeljagdPoints = $schnitzeljagd->getGameData(2);
-var_dump($schnitzeljagdPoints);
+switch ($action) {
+    case 'gameList':
+        $controller = new Controller();
+        echo $controller->getAllGamesForGameList();
+        break;
+}
+
+
+?>
