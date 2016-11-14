@@ -6,6 +6,10 @@
  * Time: 14:45
  */
 
-include_once ("Model.php");
 
-$model = new Model();
+include_once ("playSchnitzeljagd.php");
+
+
+$schnitzeljagd = new playSchnitzeljagd();
+$schnitzeljagdPoints = $schnitzeljagd->getGameData(2);
+var_dump($schnitzeljagdPoints);
