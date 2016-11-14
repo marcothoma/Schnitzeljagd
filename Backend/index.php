@@ -23,10 +23,13 @@ switch ($action) {
         $controller = new Controller();
         echo $controller->getAllGamesForGameList();
         break;
+    case 'addPoint':
     case 'createSchnitzeljagd':
         $controller = new Controller();
-        $controller->addPoint();
-        $controller->saveSchnitzeljagd();
+        $controller->addPoint($_POST['description'],$_POST['yCoordinate'],$_POST['yCoordinate']);
+        if($action == 'createSchnitzeljagd') {
+            $controller->saveSchnitzeljagd();
+        }
         break;
 }
 

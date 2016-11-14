@@ -8,7 +8,7 @@ myApp.directive('sjSavePoint', function() {
         templateUrl: '../Frontend/templates/savePointView.html'
     };
 });
-myApp.controller('savePointController', function($scope) {
+myApp.controller('savePointController', function($scope, $http) {
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position){
@@ -18,8 +18,18 @@ myApp.controller('savePointController', function($scope) {
             });
         });
     }
+
     $scope.submit = function() {
-        console.log($scope.description);
+        $http({
+            method: "post",
+            url: '../Backend/index.php?action=addPoint',
+            data: {
+                description: $scope.description,
+                xCoordinate: $scope.longitude,
+                yCoordinate: $scope.latitude
+            },
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        });
     }
 
 });
