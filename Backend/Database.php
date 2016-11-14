@@ -21,6 +21,10 @@ class Database
 
             static::$dbConnection = new Database();
             static::$dbConnection = new mysqli($servername, $username, $password, $dbName);
+
+            if(@static::$dbConnection->connection_error){
+                die("Datenbankverbindung fehlgeschlagen: ".static::$dbConnection->conntection_error);
+            }
         }
 
         return static::$dbConnection;
