@@ -1,0 +1,21 @@
+<div>
+    <input type="text" class="input-medium search-query" name="s" placeholder="Search" value="">
+    <hr/>
+</div>
+<div class="container">
+    <h2>Basic Table</h2>
+    <form>
+    <table class="table">
+        <tbody>
+        <tr ng-repeat="game in games | orderBy:'-upvotes'">
+            <td><input type="radio" id='regular' name="{{'radio_' + game.name}}"></td>
+            <td ng-click="">{{game.name}}</td>
+            <td>{{game.points}}</td>
+            <td>{{game.upvotes}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
