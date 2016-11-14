@@ -1,14 +1,13 @@
 <div>
-    <input type="text" class="input-medium search-query" name="s" placeholder="Search" value="">
+    <input type="text" ng-model="gameSearch" class="input-medium form-control search-query" name="s" placeholder="Search" value="">
     <hr/>
 </div>
-<div class="container">
-    <h2>Basic Table</h2>
+<div class="container media">
     <form>
-    <table class="table">
+    <table class="table table-striped table-responsive table-fixed table-condensed">
         <tbody>
-        <tr ng-repeat="game in games | orderBy:'-upvotes'">
-            <td><input type="radio" id='regular' name="{{'radio_' + game.name}}"></td>
+        <tr ng-click="setClicked(game.name)" ng-repeat="game in games | orderBy:'-upvotes' | filter: gameSearch">
+            <td><input type="radio" id="{{'radio_' + game.name}}" name="radioGames"></td>
             <td ng-click="">{{game.name}}</td>
             <td>{{game.points}}</td>
             <td>{{game.upvotes}}</td>
@@ -16,6 +15,6 @@
         </tbody>
     </table>
 
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class=" btn-block btn btn-default">Auf Schnitzeljagd gehen</button>
     </form>
 </div>
