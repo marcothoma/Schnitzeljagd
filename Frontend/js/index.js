@@ -11,6 +11,10 @@ myApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'newSchnitzeljagd.html',
 
         })
+        .when('/goOnSchnitzeljagd', {
+            templateUrl: 'goOnSchnitzeljagd.html',
+
+        })
         .when('/savePoint', {
             templateUrl: 'savePoint.html',
 

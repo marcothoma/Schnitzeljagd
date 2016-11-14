@@ -9,5 +9,4 @@ myApp.directive('sjSavePoint', function() {
     };
 });
 myApp.controller('savePointController', function() {
-
 });
