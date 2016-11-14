@@ -8,7 +8,7 @@ myApp.directive('sjGoOnSchnitzeljagd', function() {
         templateUrl: '../Frontend/templates/goOnSchnitzeljagdView.html'
     };
 });
-myApp.controller('goOnSchnitzeljagdController', function($scope) {
+myApp.controller('goOnSchnitzeljagdController', function($scope,$http) {
 
     $http.get("../Backend/index.php?action=gameList").success(function(games){
         $scope.games = games;
