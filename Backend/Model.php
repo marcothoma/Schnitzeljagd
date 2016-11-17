@@ -60,7 +60,9 @@ class Model {
     public function getNextGameID() {
         $sql = "SELECT MAX(`id`) + 1 \"NextGameID\" FROM `games`";
         $sqlResult =  $this->databaseConnection->query($sql);
-        return $this->readSqlResult($sqlResult);
+        $sqlReadResult = $this->readSqlResult($sqlResult);
+        $gameID = $sqlReadResult['0']->NextGameID;
+        return $gameID;
     }
 
     public function readSqlResult($sqlResult) {

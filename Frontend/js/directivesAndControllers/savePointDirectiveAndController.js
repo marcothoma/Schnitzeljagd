@@ -22,9 +22,6 @@ myApp.controller('savePointController', function($scope, $http, pointService) {
         var description = document.getElementById("description");
         var point = new Array(description.value, $scope.longitude, $scope.latitude);
         pointService.addPoint(point);
-        console.log(pointService.getPoints());
-        console.log(point);
-        console.log(description.value);
         alert("Punkt gespeichert");
         window.location = "#newSchnitzeljagd";
     }

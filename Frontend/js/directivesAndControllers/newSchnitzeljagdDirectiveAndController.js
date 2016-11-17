@@ -11,17 +11,17 @@ myApp.directive('sjNewSchnitzeljagd', function() {
 myApp.controller('newSchnitzeljagdController', function($scope,$http, pointService) {
 
     $scope.submit = function () {
-        console.log(pointService.getPoints());
         $http({
             method: "post",
             url: '../Backend/index.php?action=createSchnitzeljagd',
             data: {
-                gameName: $scope.gameName.value,
+                gameName: $scope.gameName,
                 isPublic: $scope.isPublic,
                 points: pointService.getPoints()
-            },
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }
+        }).success(function () {
+            window.location = "#/";
+            location.reload();
         });
-        location.reload();
     };
 });

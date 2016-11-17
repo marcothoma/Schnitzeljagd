@@ -9,7 +9,7 @@ class Controller{
         foreach($games as $gameKey=>$gameValue){
             if($gameValue->isPublic ==  "1"){
                 $numberOfPointsResult = $model->getNumberOfPointsByGameID($gameValue->id);
-                $gamesJson .= '{"name": "'.$gameValue->name.'", "points": "'.$numberOfPointsResult[0]->NumberOfPoints.'", "upvotes": "'.$gameValue->ratingPoints.'"},';
+                $gamesJson .= '{"id":"'.$gameValue->id.'", "name": "'.$gameValue->name.'", "points": "'.$numberOfPointsResult[0]->NumberOfPoints.'", "upvotes": "'.$gameValue->ratingPoints.'"},';
             }
         }
 

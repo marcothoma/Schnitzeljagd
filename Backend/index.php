@@ -8,7 +8,6 @@
 
 include_once ("RessourceLoader.php");
 
-
 $props = json_decode(file_get_contents('php://input'));
 
 if(!$_GET['action']){
@@ -28,7 +27,7 @@ switch ($action) {
         break;
     case 'createSchnitzeljagd':
         $controller = new Controller();
-        $controller->saveSchnitzeljagd($props->points);
+        $controller->saveSchnitzeljagd($props);
         break;
 }
 
