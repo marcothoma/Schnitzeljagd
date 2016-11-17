@@ -25,3 +25,20 @@ myApp.config(['$routeProvider', function ($routeProvider) {
         });
 
 }]);
+myApp.service('pointService', function() {
+    var pointList = [];
+
+    var addPoint = function(point) {
+        pointList.push(point);
+    };
+
+    var getPoints = function(){
+        return pointList;
+    };
+
+    return {
+        addPoint: addPoint,
+        getPoints: getPoints
+    };
+
+});

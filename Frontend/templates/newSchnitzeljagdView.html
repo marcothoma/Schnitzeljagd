@@ -1,6 +1,6 @@
 <div>
     <a class="btn btn-block btn-default" href="#savePoint">Neuer Punkt setzen!</a>
-    <a class="btn btn-block btn-default" data-toggle="modal" data-target="#myModal">Ganze Jagd!</a>
+    <a class="btn btn-block btn-default" data-toggle="modal" data-target="#myModal">Ganze Jagd speichern!</a>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -22,18 +22,18 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
 
-                    <form role="form">
+                    <form role="form" ng-submit="submit()">
                         <div class="form-group">
                             <label for="gameName">Spielname</label>
-                            <input type="text" class="form-control"
+                            <input ng-model="gameName" required type="text" class="form-control"
                                    id="gameName" placeholder="Spielname"/>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"/> Private
+                                <input ng-model="isPublic" type="checkbox" checked/> Private
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button class="btn btn-default">Submit</button>
                     </form>
 
 

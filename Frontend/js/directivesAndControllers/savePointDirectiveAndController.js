@@ -8,8 +8,7 @@ myApp.directive('sjSavePoint', function() {
         templateUrl: '../Frontend/templates/savePointView.html'
     };
 });
-myApp.controller('savePointController', function($scope, $http) {
-
+myApp.controller('savePointController', function($scope, $http, pointService) {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position){
             $scope.$apply(function(){
@@ -20,16 +19,13 @@ myApp.controller('savePointController', function($scope, $http) {
     }
 
     $scope.submit = function() {
-        $http({
-            method: "post",
-            url: '../Backend/index.php?action=addPoint',
-            data: {
-                description: $scope.description,
-                xCoordinate: $scope.longitude,
-                yCoordinate: $scope.latitude
-            },
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        });
+        var description = document.getElementById("description");
+        var point = new Array(description.value, $scope.longitude, $scope.latitude);
+        pointService.addPoint(point);
+        console.log(pointService.getPoints());
+        console.log(point);
+        console.log(description.value);
+        alert("Punkt gespeichert");
+        window.location = "#newSchnitzeljagd";
     }
-
 });
