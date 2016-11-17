@@ -29,6 +29,10 @@ switch ($action) {
         $controller = new Controller();
         $controller->saveSchnitzeljagd($props);
         break;
+    case 'playGame':
+        $controller = new Controller();
+        echo $controller->getAllPointsForGame('2');
+        break;
 }
 
 
