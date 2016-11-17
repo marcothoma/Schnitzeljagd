@@ -8,26 +8,22 @@ myApp.directive('sjPlaySchnitzeljagd', function() {
         templateUrl: '../Frontend/templates/playSchnitzeljagdView.html'
     };
 });
-myApp.controller('playSchnitzeljagdController', function($scope, $http, pointService) {
+myApp.controller('playSchnitzeljagdController', function($scope, $http, gameService) {
+    console.log(gameService.getGame());
+    console.log(gameService.getGame().id);
+    $http({
+        method: "post",
+        url: '../Backend/index.php?action=playGame',
+        data: {
+            gameID: gameService.getGame.id
+        }
+    }).success(function(data) {
+        console.log(data)
+    });
 
     $scope.submit = function() {
-        console.log(pointService.getPoints());
-        if (pointService.getPoints().length != 0) {
-            $http({
-                method: "post",
-                url: '../Backend/index.php?action=createSchnitzeljagd',
-                data: {
-                    gameName: $scope.gameName.value,
-                    isPublic: $scope.isPublic,
-                    points: pointService.getPoints()
-                },
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            });
-            location.reload();
+        console.log(gameService.getGame());
+
         }
-        else {
-            alert("Keine Punkte vorhanden")
-        }
-    };
 
 });

@@ -31,7 +31,7 @@ switch ($action) {
         break;
     case 'playGame':
         $controller = new Controller();
-        echo $controller->getAllPointsForGame('2');
+        echo $controller->getAllPointsForGame('5');
         break;
 }
 
