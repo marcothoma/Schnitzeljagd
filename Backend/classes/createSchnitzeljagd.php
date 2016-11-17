@@ -19,7 +19,7 @@ class Controller {
         $this->allPoints[] = ['description'=> $description, 'xCoordinate'=> $xCoordinate, 'yCoordinate'=> $yCoordinate];
     }
 
-    public function saveSchnitzeljagd() {
+    public function saveSchnitzeljagd($points) {
         $this->model->saveGame('', '', '');
         $gameID = $this->model->getNextGameID();
         foreach ($this->allPoints as $pointKey => $pointValue) {

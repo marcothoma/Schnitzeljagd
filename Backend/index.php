@@ -28,10 +28,7 @@ switch ($action) {
         break;
     case 'createSchnitzeljagd':
         $controller = new Controller();
-        /*$controller->addPoint($_POST['description'],$_POST['xCoordinate'],$_POST['yCoordinate']);
-        if($action == 'createSchnitzeljagd') {
-            $controller->saveSchnitzeljagd();
-        }*/
+        $controller->saveSchnitzeljagd($props->points);
         break;
 }
 
