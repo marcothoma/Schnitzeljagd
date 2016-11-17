@@ -49,6 +49,15 @@ myApp.service('pointService', function() {
 
 myApp.service('gameService', function() {
     var game = "";
+    var pointList = []
+
+    var setPoints = function(points) {
+        pointList = points;
+    };
+
+    var getPoints = function(){
+        return pointList;
+    };
 
     var setGame = function(tempGame) {
         game = tempGame;
@@ -60,7 +69,9 @@ myApp.service('gameService', function() {
 
     return {
         setGame: setGame,
-        getGame: getGame
+        getGame: getGame,
+        setPoints: setPoints,
+        getPoints: getPoints
     };
 
 });
