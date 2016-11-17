@@ -8,8 +8,9 @@ myApp.directive('sjGoOnSchnitzeljagd', function() {
         templateUrl: '../Frontend/templates/goOnSchnitzeljagdView.html'
     };
 });
-myApp.controller('goOnSchnitzeljagdController', function($scope,$http, gameService) {
+myApp.controller('goOnSchnitzeljagdController', function($scope,$http, gameService, settingsService) {
 
+    settingsService.changeReload(true);
 
     $http.get("../Backend/index.php?action=gameList").success(function(games){
         $scope.games = games;
@@ -23,6 +24,7 @@ myApp.controller('goOnSchnitzeljagdController', function($scope,$http, gameServi
         radioButtonToSelect.checked = true;
     };
     $scope.submit = function() {
+        settingsService.changeCanChange(true);
         console.log("submit");
         window.location = "#playSchnitzeljagd";
     }

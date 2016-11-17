@@ -8,7 +8,11 @@ myApp.directive('sjNewSchnitzeljagd', function() {
         templateUrl: '../Frontend/templates/newSchnitzeljagdView.html'
     };
 });
-myApp.controller('newSchnitzeljagdController', function($scope, $http, pointService) {
+myApp.controller('newSchnitzeljagdController', function($scope, $http, pointService, settingsService) {
+
+    settingsService.changeCanChange(true);
+    settingsService.changeReload(true);
+
 
     $scope.submit = function() {
         console.log(pointService.getPoints());

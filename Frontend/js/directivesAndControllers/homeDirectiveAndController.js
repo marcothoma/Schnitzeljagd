@@ -8,6 +8,8 @@ myApp.directive('sjHome', function() {
         templateUrl: '../Frontend/templates/homeView.html'
     };
 });
-myApp.controller('homeController', function() {
-
+myApp.controller('homeController', function(settingsService) {
+    if (settingsService.getReload()) {
+        window.location.reload()
+    }
 });
