@@ -8,22 +8,30 @@ myApp.directive('sjPlaySchnitzeljagd', function() {
         templateUrl: '../Frontend/templates/playSchnitzeljagdView.html'
     };
 });
-myApp.controller('playSchnitzeljagdController', function($scope, $http, gameService) {
-    console.log(gameService.getGame());
-    console.log(gameService.getGame().id);
-    $http({
-        method: "post",
-        url: '../Backend/index.php?action=playGame',
-        data: {
-            gameID: gameService.getGame.id
-        }
-    }).success(function(data) {
-        console.log(data)
-    });
+myApp.controller('playSchnitzeljagdController', function($scope, $http, gameService, settingsService) {
+    if (settingsService.getCanChange()) {
 
-    $scope.submit = function() {
         console.log(gameService.getGame());
+        console.log(gameService.getGame().id);
+        $http({
+            method: "post",
+            url: '../Backend/index.php?action=playGame',
+            data: {
+                gameID: gameService.getGame.id
+            }
+        }).success(function(data) {
+            console.log(data)
+        });
+
+        $scope.submit = function() {
+            console.log(gameService.getGame());
 
         }
+    }
+    else {
+        alert("Don't even Try it!");
+        settingsService.changeReload(true);
+        window.location = "#home";
+    }
 
 });
