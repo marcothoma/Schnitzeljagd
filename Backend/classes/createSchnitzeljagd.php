@@ -15,8 +15,8 @@ class Controller {
     }
 
     public function saveSchnitzeljagd($props) {
-        $this->model->saveGame($props->gameName, $props->isPublic, '0');
         $gameID = $this->model->getNextGameID();
+        $this->model->saveGame($props->gameName, $props->isPublic, '0');
         foreach ($props->points as $point) {
             $this->model->savePoint($gameID, $point['0'], $point['1'], $point['2']);
         }
