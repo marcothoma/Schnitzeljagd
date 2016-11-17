@@ -13,11 +13,12 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
     $scope.submit = function() {
         console.log(pointService.getPoints());
         if (pointService.getPoints().length != 0) {
+            console.log($scope.gameName);
             $http({
                 method: "post",
                 url: '../Backend/index.php?action=createSchnitzeljagd',
                 data: {
-                    gameName: $scope.gameName.value,
+                    gameName: $scope.gameName,
                     isPublic: $scope.isPublic,
                     points: pointService.getPoints()
                 },
