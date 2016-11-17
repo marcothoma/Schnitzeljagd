@@ -1,7 +1,7 @@
 /**
  * Created by Anwender on 14.11.2016.
  */
-myApp.directive('sjPlaySchnitzeljagd', function() {
+myApp.directive('sjPlaySchnitzeljagd', function () {
 
     return {
         controller: 'playSchnitzeljagdController',
@@ -17,7 +17,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
             method: "post",
             url: '../Backend/index.php?action=playGame',
             data: {
-                gameID: gameService.getGame.id
+                gameID: gameService.getGame().id
             }
         }).success(function(data) {
             console.log(data)
