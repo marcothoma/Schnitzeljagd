@@ -10,7 +10,6 @@ class Controller{
 
     public function getAllPointsForGame($gameID){
         $model = new Model();
-
         $pointsJson = '';
         $points = $model->getAllPointsByGameID($gameID);
         foreach($points as $pointKey => $pointValue){
