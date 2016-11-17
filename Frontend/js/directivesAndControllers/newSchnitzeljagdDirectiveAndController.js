@@ -37,7 +37,7 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
         }
     };
 
-    function initialize(coords, $scope) {
+    function initialize_map(coords, $scope) {
         var latlng = new google.maps.LatLng(coords.latitude, coords.longitude);
         var myOptions = {
             zoom: 18,
@@ -49,12 +49,12 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
         var marker = new google.maps.Marker({
             position: latlng,
             map: map,
-            title: "Boss Standort"
+            title: "Dein Standort"
         });
     }
 
     navigator.geolocation.getCurrentPosition(function(position){
-        initialize(position.coords);
+        initialize_map(position.coords);
     }, function(){
         document.getElementById('mapCreateNewSchnitzeljagd').innerHTML = 'Deine Position konnte leider nicht ermittelt werden';
     });

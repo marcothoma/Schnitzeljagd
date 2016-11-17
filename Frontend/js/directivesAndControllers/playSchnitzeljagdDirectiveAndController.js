@@ -34,7 +34,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
         window.location = "#home";
     }
 
-    function initialize(coords, $scope) {
+    function initialize_map(coords, $scope) {
         var latlng = new google.maps.LatLng(coords.latitude, coords.longitude);
         var myOptions = {
             zoom: 18,
@@ -51,7 +51,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
     }
 
     navigator.geolocation.getCurrentPosition(function(position){
-        initialize(position.coords);
+        initialize_map(position.coords);
     }, function(){
         document.getElementById('mapGoOnSchnitzeljagd').innerHTML = 'Deine Position konnte leider nicht ermittelt werden';
     });
