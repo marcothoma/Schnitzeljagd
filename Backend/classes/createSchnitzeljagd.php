@@ -9,21 +9,16 @@
 class Controller {
 
     private $model;
-    private $allPoints = array();
 
     public function __construct() {
         $this->model = new Model();
     }
 
-    public function addPoint($description, $xCoordinate, $yCoordinate) {
-        $this->allPoints[] = ['description'=> $description, 'xCoordinate'=> $xCoordinate, 'yCoordinate'=> $yCoordinate];
-    }
-
-    public function saveSchnitzeljagd($points) {
-        $this->model->saveGame('', '', '');
+    public function saveSchnitzeljagd($props) {
+        $this->model->saveGame($props->gameName, $props->isPublic, '0');
         $gameID = $this->model->getNextGameID();
-        foreach ($this->allPoints as $pointKey => $pointValue) {
-            $this->model->savePoint($gameID, $pointValue['description'], $pointValue['xCoordinate'], $pointValue['yCoordinate']);
+        foreach ($props->points as $point) {
+            $this->model->savePoint($gameID, $point['0'], $point['1'], $point['2']);
         }
         return true;
     }

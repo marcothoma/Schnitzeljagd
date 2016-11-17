@@ -22,8 +22,10 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
                     points: pointService.getPoints()
                 },
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).success(function () {
+                window.location = "#/";
+                location.reload();
             });
-            location.reload();
         }
         else {
             alert("Keine Punkte vorhanden")
