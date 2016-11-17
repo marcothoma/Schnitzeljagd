@@ -11,6 +11,10 @@ myApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'newSchnitzeljagd.html',
 
         })
+        .when('/playSchnitzeljagd', {
+            templateUrl: 'playSchnitzeljagd.html',
+
+        })
         .when('/goOnSchnitzeljagd', {
             templateUrl: 'goOnSchnitzeljagd.html',
 
@@ -39,6 +43,24 @@ myApp.service('pointService', function() {
     return {
         addPoint: addPoint,
         getPoints: getPoints
+    };
+
+});
+
+myApp.service('gameService', function() {
+    var game = "";
+
+    var setGame = function(tempGame) {
+        game = tempGame;
+    };
+
+    var getGame = function(){
+        return game;
+    };
+
+    return {
+        setGame: setGame,
+        getGame: getGame
     };
 
 });

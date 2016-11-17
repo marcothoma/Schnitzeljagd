@@ -3,18 +3,18 @@
     <hr/>
 </div>
 <div class="container media">
-    <form>
+    <form role="form" ng-submit="submit()">
     <table class="table table-striped table-responsive table-fixed table-condensed">
         <tbody>
-        <tr ng-click="setClicked(game.name)" ng-repeat="game in games | orderBy:'-upvotes' | filter: gameSearch">
-            <td><input type="radio" id="{{'radio_' + game.name}}" name="radioGames"></td>
-            <td ng-click="">{{game.name}}</td>
+        <tr ng-click="setClicked(game)" ng-repeat="game in games | orderBy:'-upvotes' | filter: gameSearch">
+            <td><input type="radio"  id="{{'radio_' + game.id}}" name="radioGames"></td>
+            <td>{{game.name}}</td>
             <td>{{game.points}}</td>
             <td>{{game.upvotes}}</td>
         </tr>
         </tbody>
     </table>
 
-        <button type="submit" class=" btn-block btn btn-default">Auf Schnitzeljagd gehen</button>
+        <button class=" btn-block btn btn-default">Auf Schnitzeljagd gehen</button>
     </form>
 </div>

@@ -1,14 +1,14 @@
 /**
  * Created by Anwender on 14.11.2016.
  */
-myApp.directive('sjNewSchnitzeljagd', function() {
+myApp.directive('sjPlaySchnitzeljagd', function() {
 
     return {
-        controller: 'newSchnitzeljagdController',
-        templateUrl: '../Frontend/templates/newSchnitzeljagdView.html'
+        controller: 'playSchnitzeljagdController',
+        templateUrl: '../Frontend/templates/playSchnitzeljagdView.html'
     };
 });
-myApp.controller('newSchnitzeljagdController', function($scope, $http, pointService) {
+myApp.controller('playSchnitzeljagdController', function($scope, $http, pointService) {
 
     $scope.submit = function() {
         console.log(pointService.getPoints());
