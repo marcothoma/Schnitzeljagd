@@ -14,7 +14,7 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
     settingsService.changeReload(true);
 
 
-    $scope.submit = function() {
+    $scope.submitNewGame = function() {
         console.log(pointService.getPoints());
         if (pointService.getPoints().length != 0) {
             console.log($scope.gameName);
@@ -28,8 +28,9 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
                 },
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).success(function () {
-                window.location = "#/";
-                location.reload();
+                console.log("success");
+                window.location = "#home";
+
             });
         }
         else {
@@ -59,4 +60,20 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
         document.getElementById('mapCreateNewSchnitzeljagd').innerHTML = 'Deine Position konnte leider nicht ermittelt werden';
     });
 
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            $scope.$apply(function() {
+                $scope.latitude = position.coords.latitude;
+                $scope.longitude = position.coords.longitude;
+            });
+        });
+    }
+
+    $scope.submitNewPoint = function() {
+        var description = document.getElementById("description");
+        var point = new Array(description.value, $scope.longitude, $scope.latitude);
+        pointService.addPoint(point);
+        alert("Punkt gespeichert");
+        $('#newPointModal').modal('hide');
+    }
 });

@@ -49,8 +49,16 @@ myApp.service('pointService', function() {
 
 myApp.service('gameService', function() {
     var game = "";
-    var pointList = []
+    var pointList = [];
+    var pointNumber = 0;
 
+    var addPointNumber =function () {
+        pointNumber++;
+    };
+
+    var getPointNumber =function () {
+        return pointNumber;
+    };
     var setPoints = function(points) {
         pointList = points;
     };
@@ -71,7 +79,9 @@ myApp.service('gameService', function() {
         setGame: setGame,
         getGame: getGame,
         setPoints: setPoints,
-        getPoints: getPoints
+        getPoints: getPoints,
+        addPointNumber: addPointNumber,
+        getPointNumber: getPointNumber
     };
 
 });
@@ -80,11 +90,11 @@ myApp.service('settingsService', function() {
     var canChange = false;
 
     var changeCanChange = function(bool) {
-        reloadHome = bool;
+        canChange = bool;
     };
 
     var getCanChange = function(){
-        return reloadHome;
+        return canChange;
     };
 
     var changeReload = function(bool) {

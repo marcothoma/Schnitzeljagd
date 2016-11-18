@@ -3,11 +3,11 @@
 </div>
 <hr>
 <div>
-    <a class="btn btn-block btn-default" href="#savePoint">Neuer Punkt setzen!</a>
-    <a class="btn btn-block btn-default" data-toggle="modal" data-target="#myModal">Ganze Jagd speichern!</a>
+    <a class="btn btn-block btn-default" data-toggle="modal" data-target="#newPointModal">Neuer Punkt setzen!</a>
+    <a class="btn btn-block btn-default" data-toggle="modal" data-target="#saveGameModal">Ganze Jagd speichern!</a>
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+    <div class="modal fade" id="saveGameModal" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -26,7 +26,7 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
 
-                    <form role="form" ng-submit="submit()">
+                    <form role="form" ng-submit="submitNewGame()">
                         <div class="form-group">
                             <label for="gameName">Spielname</label>
                             <input ng-model="gameName" required type="text" class="form-control"
@@ -38,6 +38,44 @@
                             </label>
                         </div>
                         <button class="btn btn-default">Submit</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="newPointModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Speichern
+                    </h4>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+
+                    <form ng-submit="submitNewPoint()">
+                        <h2 class="text-center">Punkt: {{latitude | number: 5}}/{{longitude | number: 5}}</h2>
+                        <div class="form-group">
+                            <label for="description">Beschreibung</label>
+                            <textarea required ng-model="description" class="form-control" id="description" rows="5"></textarea>
+                        </div>
+                        <!--<div classes="form-group">-->
+                        <!--<label for="exampleInputFile">File input</label>-->
+                        <!--<input type="file" classes="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">-->
+                        <!--</div>-->
+                        <button href="#newSchnitzeljagd" class="btn btn-default">Speichern</button>
                     </form>
 
 

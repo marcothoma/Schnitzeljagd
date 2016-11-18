@@ -14,6 +14,7 @@ myApp.controller('goOnSchnitzeljagdController', function($scope,$http, gameServi
 
     $http.get("../Backend/index.php?action=gameList").success(function(games){
         $scope.games = games;
+        console.log(games);
     });
 
     $scope.setClicked = function(game) {
