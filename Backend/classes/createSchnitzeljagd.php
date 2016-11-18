@@ -15,7 +15,7 @@ class Controller {
         foreach ($props->points as $point) {
             $model->savePoint($gameID, $point['0'], $point['1'], $point['2']);
         }
-        return true;
+        return $gameID;
     }
 
 }
