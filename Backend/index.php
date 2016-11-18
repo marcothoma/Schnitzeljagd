@@ -35,7 +35,7 @@ switch ($action) {
         break;
     case 'increaseUpvotes':
         $controller = new Controller();
-        $controller->getAllPointsForGame($props->gameID);
+        $controller->increaseUpvotes($props->gameID);
         break;
 }
 

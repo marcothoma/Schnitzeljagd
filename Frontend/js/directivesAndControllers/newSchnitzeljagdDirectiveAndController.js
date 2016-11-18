@@ -30,7 +30,7 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
             }).success(function () {
                 console.log("success");
                 window.location = "#home";
-
+                alert("Spiel gespeichert");
             });
         }
         else {

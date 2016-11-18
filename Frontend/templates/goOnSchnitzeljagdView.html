@@ -1,10 +1,19 @@
 <div>
-    <input type="text" ng-model="gameSearch" class="input-medium form-control search-query" name="s" placeholder="Search" value="">
+    <input type="text" ng-model="gameSearch" class="input-medium form-control search-query" name="s" placeholder="Suchen Name, Anz. Punkte und Upvotes..." value="">
     <hr/>
 </div>
 <div class="container media">
     <form role="form" ng-submit="submit()">
     <table class="table table-striped table-responsive table-fixed table-condensed">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Spielname</th>
+            <th>Anz. Punkte</th>
+            <th>Upvotes</th>
+        </tr>
+        </thead>
+
         <tbody>
         <tr ng-click="setClicked(game)" ng-repeat="game in games | orderBy:'-upvotes' | filter: gameSearch">
             <td><input type="radio"  id="{{'radio_' + game.id}}" name="radioGames" required></td>

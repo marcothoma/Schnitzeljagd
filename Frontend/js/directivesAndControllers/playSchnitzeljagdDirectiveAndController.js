@@ -45,7 +45,6 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
 
 
         var gameInterval = window.setInterval(function () {
-            alert("intervall");
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     $scope.$apply(function() {
@@ -54,14 +53,20 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
                     });
                 });
             }
+            navigator.geolocation.getCurrentPosition(function(position){
+                initialize_map(position.coords);
+            }, function(){
+                document.getElementById('mapGoOnSchnitzeljagd').innerHTML = 'Deine Position konnte leider nicht ermittelt werden';
+            });
 
             if (getDistanceFromLatLonInKm($scope.latitude,$scope.longitude, gameService.getPoints()[gameService.getPointNumber()]["latitude"],gameService.getPoints()[gameService.getPointNumber()]["longitude"]) <= 1000) {
-                navigator.vibrate(1000);
-                $scope.showNearbyModal();
-                gameService.addPointNumber();
-                console.log(gameService.getPointNumber());
-                /*Create New Marker*/
-                if (gameService.getPointNumber() == gameService.getPoints().length) {
+                if (gameService.getPointNumber() != gameService.getPoints().length -1) {
+                    navigator.vibrate(1000);
+                    $scope.showNearbyModal();
+                    gameService.addPointNumber();
+                    console.log(gameService.getPointNumber());
+                    /*Create New Marker*/
+                }else{
                     clearInterval(gameInterval);
                     $scope.showEndModal();
                 }
@@ -111,6 +116,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
                 action: function(dialogItself) {
                     dialogItself.close();
                     settingsService.changeReload(true);
+                    console.log(gameService.getGame()["id"]);
                     $http({
                         method: "post",
                         url: '../Backend/index.php?action=increaseUpvotes',
@@ -182,6 +188,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
             title: "Dein Standort"
         });
     }
+
 
     navigator.geolocation.getCurrentPosition(function(position){
         initialize_map(position.coords);
