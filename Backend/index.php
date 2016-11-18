@@ -27,7 +27,7 @@ switch ($action) {
         break;
     case 'createSchnitzeljagd':
         $controller = new Controller();
-        $controller->saveSchnitzeljagd($props);
+        echo $controller->saveSchnitzeljagd($props);
         break;
     case 'playGame':
         $controller = new Controller();
@@ -36,6 +36,10 @@ switch ($action) {
     case 'increaseUpvotes':
         $controller = new Controller();
         $controller->increaseUpvotes($props->gameID);
+        break;
+    case 'getPrivateGame':
+        $controller = new Controller();
+        echo $controller->getPrivateGame($props->gameID);
         break;
 }
 

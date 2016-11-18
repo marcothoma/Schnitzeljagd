@@ -203,7 +203,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
             position: latlng,
             map: map,
             title: "Dein Standort",
-            label: "ME"
+            icon: 'img/meMarker.png'
         });
 
         var markers = locations.map(function(location, i) {
