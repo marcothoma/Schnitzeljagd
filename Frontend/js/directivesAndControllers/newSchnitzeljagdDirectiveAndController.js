@@ -15,6 +15,7 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
 
 
     $scope.submitNewGame = function() {
+        var isPublicValue = $scope.isPublic;
         console.log(pointService.getPoints());
         if (pointService.getPoints().length != 0) {
             console.log($scope.gameName);
@@ -28,13 +29,14 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
                 },
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).success(function (id) {
+                console.log(id);
                 console.log("success");
                 window.location = "#home";
-                if ($scope.isPublic) {
-                    alert("Spiel gespeichert.");
+                if (isPublicValue != true) {
+                    alert("Spiel gespeichert. Die Nummer Ihres Privaten Spiels ist: " + id);
                 }
                 else {
-                    alert("Spiel gespeichert. Die Nummer Ihres Privaten Spiels ist: " + id);
+                    alert("Spiel gespeichert.");
                 }
 
             });
@@ -56,7 +58,8 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
         var marker = new google.maps.Marker({
             position: latlng,
             map: map,
-            title: "Dein Standort"
+            title: "Dein Standort",
+            icon: 'img/meMarker.png'
         });
     }
 
@@ -81,6 +84,7 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
         pointService.addPoint(point);
         alert("Punkt gespeichert");
         $('#newPointModal').modal('hide');
+        $('#description').val('');
     };
 
     var gameInterval = window.setInterval(function() {
