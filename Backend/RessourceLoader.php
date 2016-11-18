@@ -12,7 +12,7 @@ class RessourceLoader {
 
         include_once("Model.php");
 
-        $fileToInclude = './classes/' . strtolower($classe) . '.php';
+        $fileToInclude = './helperClasses/' . strtolower($classe) . '.php';
 
         if (file_exists($fileToInclude)) {
             include($fileToInclude);
