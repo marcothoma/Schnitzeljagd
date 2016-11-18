@@ -19,10 +19,9 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
                 gameID: gameService.getGame().id
             }
         }).success(function(data) {
-            console.log(data[0]);
             gameService.setPoints(data);
             console.log("-----------------");
-            console.log(gameService.getPoints()[gameService.getPointNumber()]["latitude"]);
+            console.log(gameService.getPoints());
             console.log("-----------------");
         });
 
@@ -46,7 +45,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
 
 
         var gameInterval = window.setInterval(function () {
-
+            alert("intervall");
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     $scope.$apply(function() {
@@ -56,7 +55,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
                 });
             }
 
-            if (getDistanceFromLatLonInKm($scope.latitude,$scope.longitude, gameService.getPoints()[gameService.getPointNumber()]["latitude"],gameService.getPoints()[gameService.getPointNumber()]["longitude"]) <= 10) {
+            if (getDistanceFromLatLonInKm($scope.latitude,$scope.longitude, gameService.getPoints()[gameService.getPointNumber()]["latitude"],gameService.getPoints()[gameService.getPointNumber()]["longitude"]) <= 1000) {
                 navigator.vibrate(1000);
                 $scope.showNearbyModal();
                 gameService.addPointNumber();
@@ -72,6 +71,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
     else {
         alert("Don't even Try it!");
         settingsService.changeReload(true);
+        settingsService.changeCanChange(true);
         window.location = "#home";
     }
 
@@ -111,8 +111,17 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
                 action: function(dialogItself) {
                     dialogItself.close();
                     settingsService.changeReload(true);
-                    /*Upvote or not*/
-                    window.location = "#home";
+                    $http({
+                        method: "post",
+                        url: '../Backend/index.php?action=increaseUpvotes',
+                        data: {
+                            gameID: gameService.getGame()["id"]
+                        }
+                    }).success(function () {
+                        console.log("success");
+                        window.location = "#home";
+
+                    });
                 }
             }, {
                 icon: 'glyphicon glyphicon-ban-circle',
