@@ -27,10 +27,16 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
                     points: pointService.getPoints()
                 },
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).success(function () {
+            }).success(function (id) {
                 console.log("success");
                 window.location = "#home";
-                alert("Spiel gespeichert");
+                if ($scope.isPublic) {
+                    alert("Spiel gespeichert.");
+                }
+                else {
+                    alert("Spiel gespeichert. Die Nummer Ihres Privaten Spiels ist: " + id);
+                }
+
             });
         }
         else {
@@ -75,5 +81,13 @@ myApp.controller('newSchnitzeljagdController', function($scope, $http, pointServ
         pointService.addPoint(point);
         alert("Punkt gespeichert");
         $('#newPointModal').modal('hide');
-    }
+    };
+
+    var gameInterval = window.setInterval(function() {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            initialize_map(position.coords);
+        }, function() {
+            document.getElementById('mapGoOnSchnitzeljagd').innerHTML = 'Deine Position konnte leider nicht ermittelt werden';
+        });
+    }, 5000);
 });

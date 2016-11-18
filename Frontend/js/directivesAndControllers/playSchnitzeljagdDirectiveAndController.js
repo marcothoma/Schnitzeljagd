@@ -76,7 +76,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
                         lng: parseFloat(gameService.getPoints()[gameService.getPointNumber()]["longitude"])
                     });
                 }
-                if (gameService.getPointNumber() != gameService.getPoints().length - 1) {
+                if (gameService.getPointNumber() != gameService.getPoints().length - 1 && getDistanceFromLatLonInKm($scope.latitude, $scope.longitude, gameService.getPoints()[gameService.getPointNumber()]["latitude"], gameService.getPoints()[gameService.getPointNumber()]["longitude"]) <= 50) {
                     navigator.vibrate(1000);
                     $scope.showNearbyModal();
                     gameService.addPointNumber();

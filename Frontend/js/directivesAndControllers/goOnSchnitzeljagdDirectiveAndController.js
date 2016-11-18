@@ -24,6 +24,15 @@ myApp.controller('goOnSchnitzeljagdController', function($scope,$http, gameServi
         var radioButtonToSelect = document.getElementById("radio_" + game.id);
         radioButtonToSelect.checked = true;
     };
+
+    /*$scope.playPrivateGame = function() {
+      console.log("Private Game");
+        $http.get("../Backend/index.php?action=getGameID").success(function(game){
+            gameService.setGame(game);
+
+        });
+    }; */
+
     $scope.submit = function() {
         settingsService.changeCanChange(true);
         console.log("submit");
