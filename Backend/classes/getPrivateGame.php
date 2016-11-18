@@ -8,7 +8,7 @@
  */
 class Controller {
 
-    public function getAllGamesForGameList($gameID){
+    public function getPrivateGame($gameID){
         $model = new Model();
         $privateGame = $model->getGameByID($gameID);
         $numberOfPointsResult = $model->getNumberOfPointsByGameID($privateGame->id);
