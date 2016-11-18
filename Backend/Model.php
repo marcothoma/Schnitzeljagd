@@ -73,7 +73,11 @@ class Model {
     public function readSqlResult($sqlResult) {
         if ($sqlResult->num_rows > 0) {
             while ($row = $sqlResult->fetch_object()) {
-                $data[] = $row;
+                $utfDecodedRow = new stdClass();
+                foreach($row as $key=>$value){
+                    $utfDecodedRow->$key = utf8_encode($value);
+                }
+                $data[] = $utfDecodedRow;
             }
         } else {
             $data[] = null;
