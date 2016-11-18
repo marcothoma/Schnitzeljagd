@@ -1,7 +1,7 @@
 /**
  * Created by Anwender on 14.11.2016.
  */
-myApp.directive('sjPlaySchnitzeljagd', function () {
+myApp.directive('sjPlaySchnitzeljagd', function() {
 
     return {
         controller: 'playSchnitzeljagdController',
@@ -25,26 +25,27 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
             console.log("-----------------");
         });
 
-        function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+        function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
             var R = 6371; // Radius of the earth in km
-            var dLat = deg2rad(lat2-lat1);  // deg2rad below
-            var dLon = deg2rad(lon2-lon1);
+            var dLat = deg2rad(lat2 - lat1);  // deg2rad below
+            var dLon = deg2rad(lon2 - lon1);
             var a =
-                    Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                     Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-                    Math.sin(dLon/2) * Math.sin(dLon/2)
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2)
                 ;
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             var d = R * c; // Distance in km
             return d * 1000;
         }
 
         function deg2rad(deg) {
-            return deg * (Math.PI/180)
+            return deg * (Math.PI / 180)
         }
 
-
-        var gameInterval = window.setInterval(function () {
+        var locations = [];
+        var firstPointAdded = false;
+        var gameInterval = window.setInterval(function() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     $scope.$apply(function() {
@@ -53,20 +54,36 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
                     });
                 });
             }
-            navigator.geolocation.getCurrentPosition(function(position){
+            navigator.geolocation.getCurrentPosition(function(position) {
+                if (gameService.getPointNumber() == 0 && firstPointAdded == false) {
+                    console.log("pointnumber is 0 -----------");
+                    firstPointAdded = true;
+                    locations.push({
+                        lat: parseFloat(gameService.getPoints()[gameService.getPointNumber()]["latitude"]),
+                        lng: parseFloat(gameService.getPoints()[gameService.getPointNumber()]["longitude"])
+                    });
+                }
                 initialize_map(position.coords);
-            }, function(){
+            }, function() {
                 document.getElementById('mapGoOnSchnitzeljagd').innerHTML = 'Deine Position konnte leider nicht ermittelt werden';
             });
 
-            if (getDistanceFromLatLonInKm($scope.latitude,$scope.longitude, gameService.getPoints()[gameService.getPointNumber()]["latitude"],gameService.getPoints()[gameService.getPointNumber()]["longitude"]) <= 1000) {
-                if (gameService.getPointNumber() != gameService.getPoints().length -1) {
+            if (getDistanceFromLatLonInKm($scope.latitude, $scope.longitude, gameService.getPoints()[gameService.getPointNumber()]["latitude"], gameService.getPoints()[gameService.getPointNumber()]["longitude"]) <= 1000) {
+                if (gameService.getPointNumber() != 1) {
+
+                    locations.push({
+                        lat: parseFloat(gameService.getPoints()[gameService.getPointNumber()]["latitude"]),
+                        lng: parseFloat(gameService.getPoints()[gameService.getPointNumber()]["longitude"])
+                    });
+                }
+                if (gameService.getPointNumber() != gameService.getPoints().length - 1) {
                     navigator.vibrate(1000);
                     $scope.showNearbyModal();
                     gameService.addPointNumber();
                     console.log(gameService.getPointNumber());
                     /*Create New Marker*/
-                }else{
+                } else {
+                    navigator.vibrate(1000);
                     clearInterval(gameInterval);
                     $scope.showEndModal();
                 }
@@ -123,7 +140,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
                         data: {
                             gameID: gameService.getGame()["id"]
                         }
-                    }).success(function () {
+                    }).success(function() {
                         console.log("success");
                         window.location = "#home";
 
@@ -160,7 +177,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
 
     $scope.showNearbyModal = function() {
         BootstrapDialog.show({
-            message: 'Sie sind ganz in der Nähe des nächsten Punktes!',
+            message: 'Sie sind ganz in der Nähe des nächsten Punktes! Nächster Hinweis: ',
             buttons: [{
                 icon: 'glyphicon glyphicon-ok',
                 label: 'Okay',
@@ -173,7 +190,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
         });
     };
     /*Create new Marker*/
-    function initialize_map(coords, $scope) {
+    function initialize_map(coords) {
         var latlng = new google.maps.LatLng(coords.latitude, coords.longitude);
         var myOptions = {
             zoom: 18,
@@ -182,17 +199,26 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
         };
         var map = new google.maps.Map(document.getElementById("mapGoOnSchnitzeljagd"), myOptions);
 
-        var marker = new google.maps.Marker({
+        var myPosition = new google.maps.Marker({
             position: latlng,
             map: map,
-            title: "Dein Standort"
+            title: "Dein Standort",
+            label: "ME"
+        });
+
+        var markers = locations.map(function(location, i) {
+            return new google.maps.Marker({
+                position: location,
+                label: "" + (i + 1),
+                map: map
+            });
         });
     }
 
 
-    navigator.geolocation.getCurrentPosition(function(position){
+    navigator.geolocation.getCurrentPosition(function(position) {
         initialize_map(position.coords);
-    }, function(){
+    }, function() {
         document.getElementById('mapGoOnSchnitzeljagd').innerHTML = 'Deine Position konnte leider nicht ermittelt werden';
     });
 
