@@ -1,0 +1,20 @@
+table {
+    display: table;
+    width: 100%;
+}
+thead, tbody {
+    float: left;
+    width: 100%;
+}
+tbody {
+    overflow: auto;
+    height: 280px;
+}
+tr {
+    width: 100%;
+    display: table;
+    text-align: left;
+}
+ th, td {
+    width: 25%;
+}

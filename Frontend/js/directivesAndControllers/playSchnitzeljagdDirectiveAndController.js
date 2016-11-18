@@ -68,7 +68,7 @@ myApp.controller('playSchnitzeljagdController', function($scope, $http, gameServ
                 document.getElementById('mapGoOnSchnitzeljagd').innerHTML = 'Deine Position konnte leider nicht ermittelt werden';
             });
 
-            if (getDistanceFromLatLonInKm($scope.latitude, $scope.longitude, gameService.getPoints()[gameService.getPointNumber()]["latitude"], gameService.getPoints()[gameService.getPointNumber()]["longitude"]) <= 1000) {
+            if (getDistanceFromLatLonInKm($scope.latitude, $scope.longitude, gameService.getPoints()[gameService.getPointNumber()]["latitude"], gameService.getPoints()[gameService.getPointNumber()]["longitude"]) <= 100) {
                 if (gameService.getPointNumber() != 1) {
 
                     locations.push({
