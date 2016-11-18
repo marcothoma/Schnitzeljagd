@@ -33,6 +33,10 @@ switch ($action) {
         $controller = new Controller();
         echo $controller->getAllPointsForGame($props->gameID);
         break;
+    case 'increaseUpvotes':
+        $controller = new Controller();
+        $controller->getAllPointsForGame($props->gameID);
+        break;
 }
 
 

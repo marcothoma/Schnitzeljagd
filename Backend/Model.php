@@ -53,16 +53,21 @@ class Model {
 
     public function getNumberOfPointsByGameID($gameID) {
         $sql = "SELECT COUNT(*) \"NumberOfPoints\" FROM `points` WHERE `fk_games` LIKE " . $gameID;
-        $sqlResult =  $this->databaseConnection->query($sql);
+        $sqlResult = $this->databaseConnection->query($sql);
         return $this->readSqlResult($sqlResult);
     }
 
     public function getNextGameID() {
         $sql = "SELECT MAX(`id`) + 1 \"NextGameID\" FROM `games`";
-        $sqlResult =  $this->databaseConnection->query($sql);
+        $sqlResult = $this->databaseConnection->query($sql);
         $sqlReadResult = $this->readSqlResult($sqlResult);
         $gameID = $sqlReadResult['0']->NextGameID;
         return $gameID;
+    }
+
+    public function increaseUpvotes($gameID) {
+        $sql = "UPDATE `games` SET `ratingPoints`= `ratingPoints`+1 WHERE `id` = ".$gameID;
+        $this->databaseConnection->query($sql);
     }
 
     public function readSqlResult($sqlResult) {
